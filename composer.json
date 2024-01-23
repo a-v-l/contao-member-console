@@ -1,0 +1,44 @@
+{
+    "name": "a-v-l/contao-member-create",
+    "description": "Add member:create command to contao-console for Contao Open Source CMS",
+    "keywords": ["contao", "console"],
+    "homepage": "https://github.com/a-v-l/contao-member-create",
+    "type": "contao-bundle",
+    "license": "MIT",
+    "authors": [{
+        "name": "Arndt v. Lucadou",
+        "homepage": "https://www.lucadou.net"
+    }],
+    "support": {
+        "issues": "https://github.com/a-v-l/contao-member-create/issues",
+        "source": "https://github.com/a-v-l/contao-member-create",
+        "forum": "https://community.contao.org"
+    },
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "contao/core-bundle": "^4.9 || ^5.0"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0",
+        "contao/easy-coding-standard": "^3.0"
+    },
+    "conflict": {
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AVL\\MemberCreate\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.0.x-dev"
+        },
+        "contao-manager-plugin": "AVL\\MemberCreate\\ContaoManager\\Plugin"
+    },
+    "scripts": {
+        "cs-fixer": [
+            "vendor/bin/ecs check src/ --fix --ansi"
+        ]
+    }
+}

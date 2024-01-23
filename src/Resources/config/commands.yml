@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    contao.command.member_create:
+        class: AVL\MemberCreate\Command\MemberCreateCommand
+        arguments:
+            - '@contao.framework'
+            - '@database_connection'
+            - '@security.password_hasher_factory'
