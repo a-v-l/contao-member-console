@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-namespace AVL\MemberCreate\Command;
+namespace AVL\MemberConsole\Command;
 
 use Contao\BackendUser;
 use Contao\Config;
@@ -29,7 +29,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 /**
- * Creates a new Contao back end user.
+ * Creates a new Contao front end user.
  *
  * @internal
  */

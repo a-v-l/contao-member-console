@@ -1,6 +1,6 @@
 <?php
 
-namespace AVL\MemberCreate\ContaoManager;
+namespace AVL\MemberConsole\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
@@ -8,20 +8,20 @@ use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use AVL\MemberCreate\AVLContaoMemberCreate;
+use AVL\MemberConsole\AVLContaoMemberConsole;
 
 class Plugin implements BundlePluginInterface, ConfigPluginInterface
 {
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create(AVLContaoMemberCreate::class)
+            BundleConfig::create(AVLContaoMemberConsole::class)
                 ->setLoadAfter([ContaoCoreBundle::class]),
         ];
     }
     
     public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig)
     {
-        $loader->load('@AVLContaoMemberCreate/src/Resources/config/commands.yml');
+        $loader->load('@AVLContaoMemberConsole/src/Resources/config/commands.yml');
     }
 }

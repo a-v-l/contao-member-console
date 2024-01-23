@@ -5,7 +5,7 @@ services:
         autoconfigure: true
 
     contao.command.member_create:
-        class: AVL\MemberCreate\Command\MemberCreateCommand
+        class: AVL\MemberConsole\Command\MemberCreateCommand
         arguments:
             - '@contao.framework'
             - '@database_connection'
