@@ -2,17 +2,9 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of Contao.
- *
- * (c) Leo Feyer
- *
- * @license LGPL-3.0-or-later
- */
-
 namespace AVL\MemberConsole\Command;
 
-use Contao\BackendUser;
+use Contao\FrontendUser;
 use Contao\Config;
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\MemberGroupModel;
@@ -233,7 +225,7 @@ class MemberCreateCommand extends Command
     private function persistUser(string $username, string $firstname, string $lastname, string $email, string $password, array $groups = null): void
     {
         $time = time();
-        $hash = $this->passwordHasherFactory->getPasswordHasher(BackendUser::class)->hash($password);
+        $hash = $this->passwordHasherFactory->getPasswordHasher(FrontendUser::class)->hash($password);
 
         $data = [
             'tstamp' => $time,
