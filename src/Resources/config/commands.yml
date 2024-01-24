@@ -10,3 +10,10 @@ services:
             - '@contao.framework'
             - '@database_connection'
             - '@security.password_hasher_factory'
+
+    contao.command.member_password:
+        class: AVL\MemberConsole\Command\MemberPasswordCommand
+        arguments:
+            - '@contao.framework'
+            - '@database_connection'
+            - '@security.password_hasher_factory'
