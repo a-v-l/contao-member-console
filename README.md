@@ -1,6 +1,6 @@
 # Member command for contao-console
 
-![Packagist Version](https://img.shields.io/packagist/v/a-v-l/contao-member-console)
+[![Packagist Version](https://img.shields.io/packagist/v/a-v-l/contao-member-console)](https://packagist.org/packages/a-v-l/contao-member-console)
 
 Adds `contao:member:create` and  `contao:member:password` commads to [Contao-CLI](https://docs.contao.org/manual/en/cli/) to create front end users or reset passwords.
 
