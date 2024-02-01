@@ -17,3 +17,9 @@ services:
             - '@contao.framework'
             - '@database_connection'
             - '@security.password_hasher_factory'
+
+    contao.command.member_delete:
+        class: AVL\MemberConsole\Command\MemberDeleteCommand
+        arguments:
+            - '@contao.framework'
+            - '@database_connection'
