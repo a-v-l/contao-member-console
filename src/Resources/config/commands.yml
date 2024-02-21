@@ -11,6 +11,11 @@ services:
             - '@database_connection'
             - '@security.password_hasher_factory'
 
+    contao.command.member_list:
+        class: AVL\MemberConsole\Command\MemberListCommand
+        arguments:
+            - '@database_connection'
+
     contao.command.member_password:
         class: AVL\MemberConsole\Command\MemberPasswordCommand
         arguments:

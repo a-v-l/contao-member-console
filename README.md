@@ -2,7 +2,7 @@
 
 [![Packagist Version](https://img.shields.io/packagist/v/a-v-l/contao-member-console)](https://packagist.org/packages/a-v-l/contao-member-console)
 
-Adds `contao:member:create`,  `contao:member:password` and `contao:member:delete` commads to [Contao-CLI](https://docs.contao.org/manual/en/cli/) to create front end users or reset passwords.
+Adds `contao:member:create`, `contao:member:list`,  `contao:member:password` and `contao:member:delete` commads to [Contao-CLI](https://docs.contao.org/manual/en/cli/) to create front end users (members), list existing members, reset passwords or delete members.
 
 The command can either be run without flags in interactive mode or with required flags and `-n` (no interaction).
 
@@ -21,6 +21,12 @@ The command can either be run without flags in interactive mode or with required
 | -p, --password=PASSWORD | The password           |
 |     --group[=GROUP]     | The groups to assign the user to (optional) (multiple values allowed) |
 | -n, --no-interaction    | Do not ask any interactive question |
+
+### Options for `contao:member:list`
+| Flag                    | Description            |
+|-------------------------|------------------------|
+| --column=COLUMN         | The columns display in the table (multiple values allowed) |
+| --format=FORMAT         | The output format (txt, json) [default: "txt"] |
 
 ### Arguments for `contao:member:password` and `contao:member:delete`
 | Argument                | Description            |
