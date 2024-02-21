@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace AVL\MemberConsole\Command;
 
 use Contao\MemberModel;
-use Contao\MemberGroupModel;
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -29,7 +27,6 @@ class MemberDeleteCommand extends Command
 
     private ContaoFramework $framework;
     private Connection $connection;
-    private Bool $delete = true;
 
     public function __construct(ContaoFramework $framework, Connection $connection)
     {

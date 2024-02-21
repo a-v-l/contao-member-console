@@ -14,6 +14,7 @@ services:
     contao.command.member_list:
         class: AVL\MemberConsole\Command\MemberListCommand
         arguments:
+            - '@contao.framework'
             - '@database_connection'
 
     contao.command.member_password:

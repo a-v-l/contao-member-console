@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AVL\MemberConsole\Command;
 
+use Contao\MemberModel;
+use Contao\CoreBundle\Framework\ContaoFramework;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,10 +23,12 @@ class MemberListCommand extends Command
     protected static $defaultName = 'contao:member:list';
     protected static $defaultDescription = 'Lists Contao front end users.';
 
+    private ContaoFramework $framework;
     private Connection $connection;
 
-    public function __construct(Connection $connection)
+    public function __construct(ContaoFramework $framework, Connection $connection)
     {
+        $this->framework = $framework;
         $this->connection = $connection;
 
         parent::__construct();
@@ -82,22 +86,26 @@ class MemberListCommand extends Command
     private function formatTableRows(array $users, array &$columns): array
     {
         if ([] === $columns) {
-            $columns = ['firstname', 'lastname', 'login', 'username', 'dateAdded', 'lastLogin'];
+            $columns = ['firstname', 'lastname', 'login', 'username', 'dateAdded', 'groups'];
         }
 
         $rows = [];
 
         foreach ($users as $user) {
             $rows[] = array_map(
-                static function (string $field) use ($user) {
+                function (string $field) use ($user) {
                     $check = '\\' === \DIRECTORY_SEPARATOR ? '1' : "\xE2\x9C\x94";
 
                     if (\in_array($field, ['tstamp', 'dateAdded', 'lastLogin'], true)) {
                         return $user[$field] ? date('Y-m-d H:i:s', (int) $user[$field]) : '';
                     }
 
-                    if (\in_array($field, ['disable', 'useTwoFactor', 'locked'], true)) {
+                    if (\in_array($field, ['login', 'disable', 'useTwoFactor', 'locked'], true)) {
                         return $user[$field] ? $check : '';
+                    }
+
+                    if ($field === 'groups') {
+                        return implode(', ', $this->getGroups($user['id']));
                     }
 
                     return $user[$field] ?? '';
@@ -116,7 +124,7 @@ class MemberListCommand extends Command
         }
 
         if ([] === $columns) {
-            $columns = ['username', 'name', 'dateAdded', 'lastLogin'];
+            $columns = ['firstname', 'lastname', 'login', 'username', 'dateAdded', 'groups'];
         }
 
         $data = [];
@@ -127,8 +135,25 @@ class MemberListCommand extends Command
                 static fn ($key) => \in_array($key, $columns, true),
                 ARRAY_FILTER_USE_KEY
             );
+            if (\array_key_exists('groups', end($data))) {
+                $data[count($data)-1]['groups'] = $this->getGroups($user['id']);
+            }
         }
 
         return $data;
+    }
+
+    private function getGroups($id) : array {
+        $this->framework->initialize();
+
+        $memberModel = $this->framework->getAdapter(MemberModel::class);
+        $member = $memberModel->findById($id);
+        $groups = $member->getRelated('groups');
+        $groups_names = [];
+        foreach ($groups as $group) {
+            $groups_names[] = $group->name;
+        }
+        
+        return $groups_names;
     }
 }
